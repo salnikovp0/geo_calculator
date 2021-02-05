@@ -1,9 +1,8 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 from flask_pymongo import PyMongo
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from celery import Celery
-import csv
 import itertools
 
 app = Flask(__name__)
@@ -106,11 +105,11 @@ def create_links(csv_file):
     return links
 
 
-def create_points(locatoins):
+def create_points(locations):
     geolocator = Nominatim(user_agent="task")
 
     points = []
-    for row in locatoins:
+    for row in locations:
         row = row.split(',')
         location = geolocator.reverse(f'{row[1]}, {row[2].strip()}')
         points.append({"name": row[0], "address": location.address})
