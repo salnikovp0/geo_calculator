@@ -1,0 +1,5 @@
+Flask==1.1.2
+flask_pymongo
+geopy
+celery==5.0.5
+redis==3.4.1
